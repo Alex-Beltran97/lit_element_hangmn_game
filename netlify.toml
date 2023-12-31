@@ -1,5 +1,4 @@
 [[headers]]
-  for = "/src/assets/fonts/*"
-
-  [headers.values]
-  Cache-Control = "public, max-age=31536000"
+  for = "/assets/fonts/*"
+    [headers.values]
+    Cache-Control = "public, max-age=31536000"
