@@ -19,57 +19,39 @@ export class CoSection extends LitElement {
 
   @property({ type: String, attribute: false })
     thirdKeyRow: string[] = ["Z", "X", "C", "V","B", "N", "M"];
-  
-  @property({ type: String, attribute: false })
-    secretKey: string[] = ["P","E","P","E"];
-  
-  @property({ type: String, attribute: false })
-    answer: string[] = [];
 
-  @property({ type: Number, attribute: false })
-    counterImg: number = 0;
+  @property({ type: Array, attribute: false })
+    answer: string[] = ["Q", "U", "E", "S", "O"];
 
-    constructor() {
-      super();
+  constructor() {
+    super();
 
-      this._generateGaps(this.secretKey);
-
-      this.addEventListener("handle-counter",this._setWrongAnswer);
-    };
+  };
 
   render() {
-
-    const { 
-      answer,
-      _setLetters,
-      firstKeyRow,
-      secondKeyRow,
-      thirdKeyRow,
-      counterImg
-    } = this;
 
     return html `
       <section class="container">
         <figure class="img">
-          <img src="./src/assets/images/${ counterImg }.png" alt="Game Image" />
+          <img src="./src/assets/images/10.png" alt="Game Image" />
         </figure>
         <div class="answer">
-          ${ answer.map((letter:string) => html `
-            <p>${letter}</p>
+          ${ this.answer.map((letter:string)=> html `
+            <p>${ letter }</p>
           `) }
         </div>
         <p class="final-result">YOU WIN 😁</p>
         <div class="keys">
           <co-key-row 
-            letter="${ _setLetters(firstKeyRow) }"
+            letter="${ this._setLetters(this.firstKeyRow) }"
           >
           </co-key-row>
           <co-key-row 
-            letter="${ _setLetters(secondKeyRow) }"
+            letter="${ this._setLetters(this.secondKeyRow) }"
           >
           </co-key-row>
           <co-key-row 
-            letter="${ _setLetters(thirdKeyRow) }"
+            letter="${ this._setLetters(this.thirdKeyRow) }"
           >
           </co-key-row>
         </div>
@@ -81,35 +63,6 @@ export class CoSection extends LitElement {
     return JSON.stringify(letters);
   }
 
-  _generateGaps(secretKey: string[]) {
-    let gaps : string[] = [];
-
-    for (let i = 0; i < secretKey.length; i++) {
-      gaps.push("_");
-    };
-
-    this.answer = gaps;
-  }
-
-  _setWrongAnswer(e: CustomEvent) {
-
-    const letterExists = this.secretKey.includes(e.detail);
-
-    if(this.counterImg >= 0 && this.counterImg < 10 && !letterExists) {
-      return this.counterImg++;
-    };
-
-    this._setCorrectAnswer(e.detail);
-  }
-
-  _setCorrectAnswer(letter: string) {
-    // for (let letterIndex in this.secretKey) {
-    //   if (this.secretKey[letterIndex] === letter) {
-    //     this.answer[letterIndex] = letter;
-    //   }
-    // };
-    this.answer[0] = letter;
-  };
 }
 
 declare global {

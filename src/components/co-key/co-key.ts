@@ -13,16 +13,12 @@ export class CoKey extends LitElement {
 
   render() {
     return html `
-      <p class="key" @click="${ this._setLetter }">
+      <p class="key">
         <span>${ this.letter }</span>
       </p>
     `;
   }
 
-  _setLetter() {
-    const customEvent = new CustomEvent("handle-counter", { bubbles: true, composed: true, detail: this.letter});
-    this.dispatchEvent(customEvent);
-  }
 }
 
 declare global {
