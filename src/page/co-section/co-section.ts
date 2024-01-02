@@ -33,7 +33,7 @@ export class CoSection extends LitElement {
     return html `
       <section class="container">
         <figure class="img">
-          <img src="./src/assets/images/10.png" alt="Game Image" />
+          <img src="./assets/images/10.png" alt="Game Image" />
         </figure>
         <div class="answer">
           ${ this.answer.map((letter:string)=> html `
