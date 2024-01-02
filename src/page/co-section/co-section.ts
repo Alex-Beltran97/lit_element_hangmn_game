@@ -8,6 +8,9 @@ import styles from './co-section-styles';
 import '../../components/co-key-row/co-key-row';
 import '../../components/co-secret-word/co-secret-word';
 
+// Context
+import ContextService from '../../context/context-service';
+
 @customElement('co-section')
 export class CoSection extends LitElement {
   static styles = [ styles ];
@@ -22,11 +25,15 @@ export class CoSection extends LitElement {
     thirdKeyRow: string[] = ["Z", "X", "C", "V","B", "N", "M"];
 
   @property({ type: Array, attribute: false })
-    answer: string[] = ["Q", "U", "E", "S", "O"];
+    answer: string[] = [];
+
+  @property({ type: Array, attribute: false })
+    contextService: ContextService = ContextService.getInstance();
 
   constructor() {
     super();
 
+    this.contextService.assignWord = "KEILOH";
   };
 
   render() {
@@ -34,7 +41,7 @@ export class CoSection extends LitElement {
     return html `
       <section class="container">
         <figure class="img">
-          <img src="./assets/images/10.png" alt="Game Image" />
+          <img src="./assets/images/0.png" alt="Game Image" />
         </figure>
         <div class="answer">
           <co-secret-word secret-word="${this._sendingSecretWord()}"></co-secret-word>
@@ -63,7 +70,7 @@ export class CoSection extends LitElement {
   }
 
   _sendingSecretWord() : string {
-    return JSON.stringify(this.answer);
+    return JSON.stringify(this.contextService.getWord);
   }
 
 }

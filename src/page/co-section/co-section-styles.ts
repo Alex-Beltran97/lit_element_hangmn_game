@@ -25,6 +25,7 @@ export default css `
   .answer {
     display: flex;
     margin-top: 1.5rem;
+    text-align: center;
   }
   
   .answer p {

@@ -14,6 +14,9 @@ export class CoSecretWord extends LitElement {
   @property({ type: Array, attribute: false })
     answer: string[] = [];
 
+  @property({ type: Array, attribute: false })
+    answerPrompt: string[] = [];
+
   constructor() {
     super();
   }
@@ -25,13 +28,22 @@ export class CoSecretWord extends LitElement {
   }
 
   _handleSecretWord() : TemplateResult<1>[] {
-    return this._coveringSecretWord().map( (gap: string) => html `
-      <p class="gap ${ gap !== "_" && `has-word` }">${ gap }</p>
+    return this.answerPrompt.map( (gap: string) => html `
+      <p 
+        class="gap ${ gap !== "_" && `has-word` }"
+        >${ gap }</p>
     `);
   };
 
-  _coveringSecretWord() : string[]{
-    return this.answer.map( _ => "_");
+  _coveringSecretWord() : void {
+    this.answerPrompt = this.answer.map( _ => "_");
+  }
+
+  _showLetter(detail : CustomEvent ) : void {
+    const { letter, index } = detail.detail;
+    const answerPrompt = [...this.answerPrompt];
+    answerPrompt[index] = letter;
+    this.answerPrompt = [...answerPrompt];
   }
 
   _getSecretWord(word: string) {
@@ -41,6 +53,12 @@ export class CoSecretWord extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this._getSecretWord(this.secretWord);
+
+    this._coveringSecretWord();
+
+    document.addEventListener("checkWord", (detail) =>{
+      this._showLetter(detail as CustomEvent);
+    });
   }
   
   disconnectedCallback(): void {

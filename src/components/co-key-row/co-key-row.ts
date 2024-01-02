@@ -12,7 +12,7 @@ export class CoKeyRow extends LitElement {
 
   @property({ type: String, attribute: "letter" })
     letters: string = "";
-
+    
   render() {
     return html `
       ${ this._getLetters().map((letter: string) => html `
