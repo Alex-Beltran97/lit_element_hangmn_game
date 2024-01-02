@@ -6,6 +6,7 @@ import styles from './co-section-styles';
 
 // Components
 import '../../components/co-key-row/co-key-row';
+import '../../components/co-secret-word/co-secret-word';
 
 @customElement('co-section')
 export class CoSection extends LitElement {
@@ -36,9 +37,7 @@ export class CoSection extends LitElement {
           <img src="./assets/images/10.png" alt="Game Image" />
         </figure>
         <div class="answer">
-          ${ this.answer.map((letter:string)=> html `
-            <p>${ letter }</p>
-          `) }
+          <co-secret-word secret-word="${this._sendingSecretWord()}"></co-secret-word>
         </div>
         <p class="final-result">YOU WIN 😁</p>
         <div class="keys">
@@ -61,6 +60,10 @@ export class CoSection extends LitElement {
 
   _setLetters(letters: string[] = []) : string {
     return JSON.stringify(letters);
+  }
+
+  _sendingSecretWord() : string {
+    return JSON.stringify(this.answer);
   }
 
 }
