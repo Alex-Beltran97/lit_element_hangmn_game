@@ -86,6 +86,14 @@ export class CoSection extends LitElement {
     this.framePicture = 0;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    
+    document.addEventListener("worngSignal", () =>{
+      this._setPictureFrames();
+    });
+  }
+
 }
 
 declare global {

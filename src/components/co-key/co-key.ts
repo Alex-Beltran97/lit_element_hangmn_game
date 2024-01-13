@@ -38,8 +38,9 @@ export class CoKey extends LitElement {
         break;
       };
     };
+    
     if (!this.hasKey) {
-      alert("Wrong Letter!!!");
+      this._sendWrongAnswerSignal();
     };
   };
 
@@ -48,6 +49,11 @@ export class CoKey extends LitElement {
     const customEvent = new CustomEvent("checkWord", {composed: true, bubbles: true, detail});
     document.dispatchEvent(customEvent);
   };
+
+  _sendWrongAnswerSignal() {
+    const customEvent = new CustomEvent("worngSignal", {composed: true, bubbles: true});
+    document.dispatchEvent(customEvent);
+  }
 
 }
 
