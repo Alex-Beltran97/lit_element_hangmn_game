@@ -17,6 +17,9 @@ export class CoKey extends LitElement {
   @property({ type: ContextService, attribute: false})
     contextService: ContextService = ContextService.getInstance();
 
+  @property({ type: Boolean, attribute: false})
+    hasKey: boolean = false;
+
   render() {
     return html `
       <p class="key" @click="${ () => this._wordIterator(this.letter) }">
@@ -26,11 +29,17 @@ export class CoKey extends LitElement {
   }
 
   _wordIterator(word: string) {
+    this.hasKey = false;
     const secretWord = this.contextService.getWord;
     for (const i in secretWord) {
       if(secretWord[i] === word) {
         this._checkWord(word, i);
+        this.hasKey = true;
+        break;
       };
+    };
+    if (!this.hasKey) {
+      alert("Wrong Letter!!!");
     };
   };
 

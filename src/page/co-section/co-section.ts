@@ -33,7 +33,7 @@ export class CoSection extends LitElement {
   constructor() {
     super();
 
-    this.contextService.assignWord = "KEILOH";
+    this.contextService.assignWord = "QUESO";
   };
 
   render() {
