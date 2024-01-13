@@ -35,7 +35,7 @@ export default css `
   }
 
   .final-result {
-    color: red;
+    visibility: hidden;
   }
 
   .keys {

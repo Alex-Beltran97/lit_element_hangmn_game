@@ -30,6 +30,9 @@ export class CoSection extends LitElement {
   @property({ type: Array, attribute: false })
     contextService: ContextService = ContextService.getInstance();
 
+  @property({ type: Number, attribute: false })
+    framePicture: number = 0;
+
   constructor() {
     super();
 
@@ -41,7 +44,7 @@ export class CoSection extends LitElement {
     return html `
       <section class="container">
         <figure class="img">
-          <img src="./src/assets/images/0.png" alt="Game Image" />
+          <img src="./src/assets/images/${ this.framePicture }.png" alt="Game Image" />
         </figure>
         <div class="answer">
           <co-secret-word secret-word="${this._sendingSecretWord()}"></co-secret-word>
@@ -71,6 +74,16 @@ export class CoSection extends LitElement {
 
   _sendingSecretWord() : string {
     return JSON.stringify(this.contextService.getWord);
+  }
+
+  _setPictureFrames() {
+    if (this.framePicture >= 0 && this.framePicture < 10) {
+      this.framePicture++;
+    };
+  }
+
+  _resetPictureFrames() {
+    this.framePicture = 0;
   }
 
 }
