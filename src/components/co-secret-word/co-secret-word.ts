@@ -28,11 +28,17 @@ export class CoSecretWord extends LitElement {
   }
 
   _handleSecretWord() : TemplateResult<1>[] {
+    this._answerIsCompleted();
     return this.answerPrompt.map( (gap: string) => html `
       <p 
         class="gap ${ gap !== "_" && `has-word` }"
         >${ gap }</p>
     `);
+  };
+
+  _answerIsCompleted() {
+    const result = this.answer.join("") === this.answerPrompt.join("");
+    this.dispatchEvent(new CustomEvent('final-resutl', { bubbles: true, composed: true, detail: result}));
   };
 
   _coveringSecretWord() : void {

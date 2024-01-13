@@ -3,6 +3,12 @@
   src:  local('Gobold'), url(../src/assets/fonts/Inter-VariableFont_slnt\,wght.ttf), format('ttf');
 }
 
+:root {
+  --primary-color: #1ADB16;
+  --primary-color-hover: #AEEFAC;
+  --secondary-color: #FF0000;
+}
+
 * {
   margin: 0;
   padding: 0;

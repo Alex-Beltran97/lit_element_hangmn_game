@@ -10,7 +10,7 @@ export default css `
     width: 1.563rem;
     height: 1.563rem;
     color: white;
-    background-color: #1ADB16;
+    background-color: var(--primary-color);
     margin: 0;
     margin-top: 0.438rem;
     align-items: center;
@@ -20,7 +20,7 @@ export default css `
   }
 
   .key:hover {
-    background-color: #aeefac;
+    background-color: var(--primary-color-hover);
   }
   
 `;

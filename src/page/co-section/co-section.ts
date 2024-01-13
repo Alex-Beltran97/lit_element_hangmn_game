@@ -7,6 +7,7 @@ import styles from './co-section-styles';
 // Components
 import '../../components/co-key-row/co-key-row';
 import '../../components/co-secret-word/co-secret-word';
+import '../../components/co-result/co-result';
 
 // Context
 import ContextService from '../../context/context-service';
@@ -49,7 +50,7 @@ export class CoSection extends LitElement {
         <div class="answer">
           <co-secret-word secret-word="${this._sendingSecretWord()}"></co-secret-word>
         </div>
-        <p class="final-result">YOU WIN 😁</p>
+        <co-result id="final-result" class="final-result"></co-result>
         <div class="keys">
           <co-key-row 
             letter="${ this._setLetters(this.firstKeyRow) }"
@@ -80,10 +81,29 @@ export class CoSection extends LitElement {
     if (this.framePicture >= 0 && this.framePicture < 10) {
       this.framePicture++;
     };
+
+    if (this.framePicture === 10) {
+      this._showResultComponent();
+    };
   }
 
   _resetPictureFrames() {
     this.framePicture = 0;
+  }
+
+  _setFinalResult(detail: CustomEvent) {
+    const result = detail.detail;
+    if (result) {
+      this._showResultComponent();
+    };
+  };
+
+  _showResultComponent() {
+    const resultComponent = this.shadowRoot?.querySelector("#final-result");
+    resultComponent?.removeAttribute("class");
+      if (this.framePicture !== 10) {
+        resultComponent?.setAttribute("isWinner", "true");
+      };
   }
 
   connectedCallback() {
@@ -91,6 +111,10 @@ export class CoSection extends LitElement {
     
     document.addEventListener("worngSignal", () =>{
       this._setPictureFrames();
+    });
+
+    document.addEventListener("final-resutl", (detail) =>{
+      this._setFinalResult(detail as CustomEvent);
     });
   }
 
