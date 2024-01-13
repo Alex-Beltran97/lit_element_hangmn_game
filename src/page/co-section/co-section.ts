@@ -41,7 +41,7 @@ export class CoSection extends LitElement {
     return html `
       <section class="container">
         <figure class="img">
-          <img src="./assets/images/0.png" alt="Game Image" />
+          <img src="./src/assets/images/0.png" alt="Game Image" />
         </figure>
         <div class="answer">
           <co-secret-word secret-word="${this._sendingSecretWord()}"></co-secret-word>
